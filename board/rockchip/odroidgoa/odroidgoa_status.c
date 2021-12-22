@@ -110,7 +110,7 @@ void odroid_wait_pwrkey(void)
 		printf("[%s] show_bmp Fail!\n", __func__);
 
 	printf("power key long pressed...\n");
-	lcd_printf(0, 18 + disp_offs, 1, "%s", "power off...");
+	lcd_printf(0, 18 + disp_offs, 1, "%s", "Shutting down...");
 	mdelay(500);
 	run_command("poweroff", 0);
 }
@@ -187,21 +187,18 @@ int odroid_display_status(int logo_mode, int logo_storage, const char *str)
 	}
 
 	switch (logo_mode) {
-	case LOGO_MODE_SYSTEM_ERR:
+	case LOGO_MODE_NO_SDCARD:
 		lcd_setfg_color("white");
 		lcd_setbg_color("black");
+		lcd_printf(0, 18 + disp_offs, 1, "Please insert a microSD card for booting device.");
+		lcd_printf(0, 19 + disp_offs, 1, "U-BOOT (%s %s)", U_BOOT_DATE, U_BOOT_TIME);
 		break;
-	case LOGO_MODE_NO_SDCARD:
-		lcd_setfg_color("grey");
-		lcd_setbg_color("white");
-		lcd_printf(0, 19 + disp_offs, 1, "U-BOOT (spinor) : %s %s", U_BOOT_DATE, U_BOOT_TIME);
-		lcd_setfg_color("black");
-		break;
+	case LOGO_MODE_SYSTEM_ERR:
 	case LOGO_MODE_LOW_BATT:
 	case LOGO_MODE_RECOVERY:
 	default:
-		lcd_setfg_color("black");
-		lcd_setbg_color("white");
+		lcd_setfg_color("white");
+		lcd_setbg_color("black");
 		break;
 	}
 

@@ -32,7 +32,7 @@ int wait_key_event(bool timeout)
 			key = dev_get_uclass_platdata(dev);
 			evt = key_read(key->code);
 			if (evt == KEY_PRESS_DOWN) {
-				printf("'%s [%d]' key pressed...\n",
+				printf("'%s [%d]' key pressed.\n",
 					key->name, key->code);
 
 				return key->code;
@@ -41,7 +41,7 @@ int wait_key_event(bool timeout)
 				lcd_setbg_color("black");
 				lcd_clear();
 				lcd_setfg_color("white");
-				lcd_printf(0, 10 + yoffs, 1, "Power key pressed... system will shut down.");
+				lcd_printf(0, 10 + yoffs, 1, "POWER key pressed. The system will now shutdown.");
 				mdelay(500);
 				run_command("poweroff", 0);
 			}
@@ -336,15 +336,15 @@ static int do_odroidtest_adc(cmd_tbl_t * cmdtp, int flag,
 	lcd_printf(0, 1, 1, "[ ADC KEY TEST ]");
 
 	/* calibration preparation */
-	lcd_printf(0, 4 + yoffs, 1, "For the Accuracy of Analog Joysticks Test,");
-	lcd_printf(0, 6 + yoffs, 1, "Calibration will be Run First.");
+	lcd_printf(0, 4 + yoffs, 1, "For the accuracy of Analog Joysticks Test,");
+	lcd_printf(0, 6 + yoffs, 1, "A calibration will be RUN FIRST.");
 	mdelay(1000);
 	lcd_setfg_color("red");
-	lcd_printf(0, 9+ yoffs, 1, "DO NOT Control Analog Joysticks During Calibration.");
+	lcd_printf(0, 9+ yoffs, 1, "DO NOT TOUCH ANALOG JOYSTICKS DURING CALIBRATION.");
 	mdelay(1000);
 	lcd_setfg_color("white");
-	lcd_printf(0, 13 + yoffs, 1, "Now, Press Any Button to Start.");
-	lcd_printf(0, 15 + yoffs, 1, "Then, Calibration will Start in 2 Seconds.");
+	lcd_printf(0, 13 + yoffs, 1, "Now press any button,");
+	lcd_printf(0, 15 + yoffs, 1, "then the calibration will start in 2 seconds.");
 	mdelay(500);
 
 	key = wait_key_event(false);
@@ -362,8 +362,8 @@ static int do_odroidtest_adc(cmd_tbl_t * cmdtp, int flag,
 	lcd_clear();
 	lcd_setfg_color("white");
 	lcd_printf(0, 1, 1, "[ ADC KEY TEST ]");
-	lcd_printf(0, 10 + yoffs, 1, "Calibration Starts...");
-	lcd_printf(0, 12 + yoffs, 1, "It may take 1 or 2 seconds.");
+	lcd_printf(0, 10 + yoffs, 1, "Starting calibration...");
+	lcd_printf(0, 12 + yoffs, 1, "It may take a few seconds.");
 
 	if (is_odroidgo3()) {
 		gpio_request(GPIO_ADCMUX_EN, "adcmux_en");
@@ -380,8 +380,8 @@ static int do_odroidtest_adc(cmd_tbl_t * cmdtp, int flag,
 	}
 
 	mdelay(500);
-	lcd_printf(0, 10 + yoffs, 1, "  Calibration Done !  ");
-	lcd_printf(0, 12 + yoffs, 1, "Press Any Button to Start Analog Joysticks Test.");
+	lcd_printf(0, 10 + yoffs, 1, "   Calibration Done!   ");
+	lcd_printf(0, 12 + yoffs, 1, "Press any button to start Analog Joysticks Test.");
 	mdelay(500);
 
 	key = wait_key_event(false);
@@ -393,11 +393,11 @@ static int do_odroidtest_adc(cmd_tbl_t * cmdtp, int flag,
 	lcd_printf(0, 1, 1, "[ ADC KEY TEST ]");
 	lcd_setfg_color("grey");
 	if (is_odroidgo3()) {
-		lcd_printf(0, 26, 1, "F3+F6 press to exit ADC KEY test");
-		lcd_printf(0, 28, 1, "Long press on PWR key to turn off power");
+		lcd_printf(0, 26, 1, "Press F3+F6 to exit ADC KEY test.");
+		lcd_printf(0, 28, 1, "Press and hold POWER key to turn off device.");
 	} else {
-		lcd_printf(0, 16, 1, "F1+F6 press to exit ADC KEY test");
-		lcd_printf(0, 17, 1, "Long press on PWR key to turn off power");
+		lcd_printf(0, 16, 1, "Press F1+F6 to exit ADC KEY test.");
+		lcd_printf(0, 17, 1, "Press and hold POWER key to turn off device.");
 	}
 
 	adc_draw_key_arrays(adcs, key_idx);
@@ -527,7 +527,7 @@ static int do_odroidtest_adc(cmd_tbl_t * cmdtp, int flag,
 	}
 
 	lcd_setfg_color("white");
-	lcd_printf(0, 18 + yoffs, 1, "ADC KEY TEST TERMINATED!");
+	lcd_printf(0, 18 + yoffs, 1, "ADC KEY TEST HAS FINISHED!");
 
 	for (i = 0; i < 8; i++)
 		adckeys[i].chk = 0;
@@ -553,7 +553,7 @@ static int do_odroidtest_backlight(cmd_tbl_t * cmdtp, int flag,
 	int key;
 	uint period_ns, duty_ns;
 
-	u8 active[4] = {10, 30, 80, 100};
+	u8 active[4] = { 10, 30, 80, 100 };
 	struct udevice *dev;
 
 	if (uclass_get_device(UCLASS_PWM, 0, &dev))
@@ -563,17 +563,17 @@ static int do_odroidtest_backlight(cmd_tbl_t * cmdtp, int flag,
 	lcd_clear();
 	lcd_setfg_color("black");
 	lcd_printf(0, 3, 1, "[ BACKLIGHT TEST ]");
-	lcd_printf(0, 12 + yoffs, 1, "Press any key to go on next step");
+	lcd_printf(0, 12 + yoffs, 1, "Press any key to continue.");
 
 	lcd_setfg_color("grey");
 	if (is_odroidgo3()) {
-		lcd_printf(0, 22 + yoffs, 1, "F3+F6 press to exit BACKLIGHT test");
+		lcd_printf(0, 22 + yoffs, 1, "Press F3+F6 to exit BACKLIGHT test");
 		lcd_printf(0, 24 + yoffs, 1,
-				"Long press on PWR key to turn off power");
+				"Press and hold POWER key to turn off device.");
 	} else {
-		lcd_printf(0, 16, 1, "F1+F6 press to exit BACKLIGHT test");
+		lcd_printf(0, 16, 1, "Press F1+F6 to exit BACKLIGHT test");
 		lcd_printf(0, 17, 1,
-				"Long press on PWR key to turn off power");
+				"Press and hold POWER key to turn off device.");
 	}
 
 	loop = 0;
@@ -587,7 +587,7 @@ static int do_odroidtest_backlight(cmd_tbl_t * cmdtp, int flag,
 			duty_ns = period_ns * active[loop] / 100;
 
 		printf("active percentage %d, duty_ns %d\n", active[loop], duty_ns);
-		lcd_printf(0, 8 + yoffs, 1, "PERCENTAGE : %d %", active[loop]);
+		lcd_printf(0, 8 + yoffs, 1, "BACKLIGHT LEVEL: %d %", active[loop]);
 
 		if(pwm_set_config(dev, 1, period_ns, duty_ns))
 			return CMD_RET_FAILURE;
@@ -614,7 +614,7 @@ static int do_odroidtest_backlight(cmd_tbl_t * cmdtp, int flag,
 	}
 
 	lcd_setfg_color("black");
-	lcd_printf(0, 18 + yoffs, 1, "BACKLIGHT TEST TERMINATED!");
+	lcd_printf(0, 18 + yoffs, 1, "BACKLIGHT TEST HAS FINISHED!");
 
 	mdelay(1000);
 
@@ -638,13 +638,13 @@ static int do_odroidtest_lcd(cmd_tbl_t * cmdtp, int flag,
 
 		lcd_setfg_color("grey");
 		if (is_odroidgo3()) {
-			lcd_printf(0, 22 + yoffs, 1, "F3+F6 press to exit LCD test");
+			lcd_printf(0, 22 + yoffs, 1, "Press F3+F6 to exit LCD test");
 			lcd_printf(0, 24 + yoffs, 1,
-					"Long press on PWR key to turn off power");
+					"Press and hold POWER key to turn off device.");
 		} else {
-			lcd_printf(0, 16, 1, "F1+F6 press to exit LCD test");
+			lcd_printf(0, 16, 1, "Press F1+F6 to exit LCD test");
 			lcd_printf(0, 17, 1,
-					"Long press on PWR key to turn off power");
+					"Press and hold POWER key to turn off device.");
 		}
 
 		if (!strcmp(colors[loop], "red"))
@@ -657,7 +657,7 @@ static int do_odroidtest_lcd(cmd_tbl_t * cmdtp, int flag,
 		lcd_printf(0, 8 + yoffs, 1, cmd);
 		sprintf(cmd, "%d / 5", (loop + 1));
 		lcd_printf(0, 10 + yoffs, 1, cmd);
-		lcd_printf(0, 12 + yoffs, 1, "Press any key to go on next step");
+		lcd_printf(0, 12 + yoffs, 1, "Press any key to continue.");
 
 		if (loop < 4)	loop++;
 		else		loop = 0;
@@ -669,7 +669,7 @@ static int do_odroidtest_lcd(cmd_tbl_t * cmdtp, int flag,
 		mdelay(500);
 	}
 
-	lcd_printf(0, 18 + yoffs, 1, "LCD TEST TERMINATED!");
+	lcd_printf(0, 18 + yoffs, 1, "LCD TEST HAS FINISHED!");
 
 	mdelay(1000);
 
@@ -757,13 +757,13 @@ static int do_odroidtest_btn(cmd_tbl_t * cmdtp, int flag,
 
 	lcd_setfg_color("grey");
 	if (is_odroidgo3()) {
-		lcd_printf(0, 22 + yoffs, 1, "F3+F6 press to exit BUTTON test");
+		lcd_printf(0, 22 + yoffs, 1, "Press F3+F6 to exit GPIO KEY test");
 		lcd_printf(0, 24 + yoffs, 1,
-				"Long press on PWR key to turn off power");
+				"Press and hold POWER key to turn off device.");
 	} else {
-		lcd_printf(0, 16, 1, "F1+F6 press to exit BUTTON test");
+		lcd_printf(0, 16, 1, "Press F1+F6 to exit GPIO KEY test");
 		lcd_printf(0, 17, 1,
-				"Long press on PWR key to turn off power");
+				"Press and hold POWER key to turn off device.");
 	}
 
 	/* key initialization */
@@ -784,7 +784,7 @@ static int do_odroidtest_btn(cmd_tbl_t * cmdtp, int flag,
 	}
 
 	lcd_setfg_color("white");
-	lcd_printf(0, 18 + yoffs, 1, "GPIO KEY TEST TERMINATED!");
+	lcd_printf(0, 18 + yoffs, 1, "GPIO KEY TEST HAS FINISHED!");
 
 	btn_set_default(numkeys);
 
@@ -823,13 +823,13 @@ static int do_odroidtest_bat(cmd_tbl_t * cmdtp, int flag,
 
 	lcd_setfg_color("grey");
 	if (is_odroidgo3()) {
-		lcd_printf(0, 26, 1, "F3+F6 press to exit BATTERY test");
+		lcd_printf(0, 26, 1, "Press F3+F6 to exit battery test.");
 		lcd_printf(0, 28, 1,
-				"Long press on PWR key to turn off power");
+				"Press and hold POWER key to turn off device.");
 	} else {
-		lcd_printf(0, 18, 1, "F1+F6 press to exit BATTERY test");
+		lcd_printf(0, 18, 1, "Press F1+F6 to exit battery test.");
 		lcd_printf(0, 19 + yoffs, 1,
-				"Long press on PWR key to turn off power");
+				"Press and hold POWER key to turn off device.");
 	}
 
 	/* check fuel gauge device */
@@ -852,19 +852,19 @@ static int do_odroidtest_bat(cmd_tbl_t * cmdtp, int flag,
 		is_bat_exist = fuel_gauge_bat_is_exist(fg);
 		printf("is_bat_exist %d\n", is_bat_exist);
 		if (is_bat_exist) {
-			lcd_printf(0, 3 + yoffs, 1, "  BATTERY : Connected  ");
+			lcd_printf(0, 3 + yoffs, 1, " BATTERY: Connected  ");
 		} else {
-			lcd_printf(0, 3 + yoffs, 1, "BATTERY : Disconnected");
+			lcd_printf(0, 3 + yoffs, 1, "BATTERY: Disconnected");
 		}
 
 		/* 2. check dc cable connection */
 		is_dcjack_exist = gpio_get_value(DC_DET_GPIO) ? 1 : 0;
 		printf("is_dcjack_exist %d\n", is_dcjack_exist);
 		if (is_dcjack_exist) {
-			lcd_printf(0, 6 + yoffs, 1, "  DC JACK : Connected  ");
+			lcd_printf(0, 6 + yoffs, 1, " DC JACK: Connected  ");
 			gpio_direction_output(PWR_LED_GPIO, 1);
 		} else {
-			lcd_printf(0, 6 + yoffs, 1, "DC JACK : Disconnected");
+			lcd_printf(0, 6 + yoffs, 1, "DC JACK: Disconnected");
 			gpio_direction_output(PWR_LED_GPIO, 0);
 		}
 
@@ -878,23 +878,23 @@ static int do_odroidtest_bat(cmd_tbl_t * cmdtp, int flag,
 		is_chrg_online = fuel_gauge_get_chrg_online(fg);
 		printf("is_chrg_online %d\n", is_chrg_online);
 		if (is_chrg_online) {
-			lcd_printf(0, 9 + yoffs, 1, "  CHARGING STATE : Online  ");
+			lcd_printf(0, 9 + yoffs, 1, "CHARGING STATE: Online ");
 			gpio_direction_output(CHG_LED_GPIO, 1);
 		} else {
-			lcd_printf(0, 9 + yoffs, 1, "CHARGING STATE : Offline");
+			lcd_printf(0, 9 + yoffs, 1, "CHARGING STATE: Offline");
 			gpio_direction_output(CHG_LED_GPIO, 0);
 		}
 
 		/* 5. show battery level */
 		bat_voltage = fuel_gauge_get_voltage(fg);
 		printf("bat_voltage %d\n", bat_voltage);
-		sprintf(cmd, "BATTERY VOLTAGE : %d (mV)", bat_voltage);
+		sprintf(cmd, "BATTERY VOLTAGE: %d (mV)", bat_voltage);
 		lcd_printf(0, 12 + yoffs, 1, cmd);
 
 		/* 6. show charging current */
 		chrg_current = fuel_gauge_get_current(fg);
 		printf("chrg_current %d\n\n", chrg_current);
-		sprintf(cmd, "CHARGING CURRENT : %d (mA)", chrg_current);
+		sprintf(cmd, "ELECTRIC CURRENT VALUE: %d (mA)", chrg_current);
 		lcd_printf(0, 15 + yoffs, 1, cmd);
 
 		/* 7. check key event */
@@ -993,22 +993,24 @@ static int do_odroidtest_audio(cmd_tbl_t * cmdtp, int flag,
 
 	lcd_setfg_color("grey");
 	if (is_odroidgo3()) {
-		lcd_printf(0, 24, 1, "During Audio Playing, Key Event is Ignored.");
-		lcd_printf(0, 26, 1, "F3+F6 press to exit AUDIO test");
+    lcd_printf(0, 23, 1, "Press any key to play test audio.");
+		lcd_printf(0, 24, 1, "While audio playing, any Key Event will be ignored.");
+		lcd_printf(0, 26, 1, "Press F3+F6 to exit AUDIO test");
 		lcd_printf(0, 28, 1,
-				"Long press on PWR key to turn off power");
+				"Press and hold POWER key to turn off device.");
 	} else {
-		lcd_printf(0, 15, 1, "During Audio Playing, Key Event is Ignored.");
-		lcd_printf(0, 16, 1, "F1+F6 press to exit AUDIO test");
+    lcd_printf(0, 14, 1, "Press any key to play test audio.");
+		lcd_printf(0, 15, 1, "While audio playing, any Key Event will be ignored.");
+		lcd_printf(0, 16, 1, "Press F1+F6 to exit AUDIO test");
 		lcd_printf(0, 17, 1,
-				"Long press on PWR key to turn off power");
+				"Press and hold POWER key to turn off device.");
 	}
 
 	/* init sound system */
 	ret = sound_init(gd->fdt_blob);
 	if (ret) {
 		printf("Initialise Audio driver failed\n");
-		lcd_printf(0, 18 + yoffs, 1, "ADC KEY TEST TERMINATED!");
+		lcd_printf(0, 18 + yoffs, 1, "ADC KEY TEST HAS FINISHED!");
 		return 0;
 	}
 
@@ -1023,10 +1025,10 @@ static int do_odroidtest_audio(cmd_tbl_t * cmdtp, int flag,
 		is_phone_det = gpio_get_value(PHONE_DET_GPIO);
 		printf("phone detected %d\n", is_phone_det);
 		if (is_phone_det) {
-			lcd_printf(0, 6 + yoffs, 1, "  HEADPHONE : Connected  ");
+			lcd_printf(0, 6 + yoffs, 1, " HEADPHONE: Connected  ");
 			sound_path(HP_PATH);
 		} else {
-			lcd_printf(0, 6 + yoffs, 1, "HEADPHONE : Disconnected");
+			lcd_printf(0, 6 + yoffs, 1, "HEADPHONE: Disconnected");
 			sound_path(SPK_PATH);
 		}
 
@@ -1037,12 +1039,12 @@ static int do_odroidtest_audio(cmd_tbl_t * cmdtp, int flag,
 
 		/* 3. play test file */
 		if (check_audio_keys(key)) {
-			lcd_printf(0, 10 + yoffs, 1, "  Audio Playing : Running  ");
+			lcd_printf(0, 10 + yoffs, 1, "AUDIO STATUS: Playing");
 			/* if boot.wav not found, 400Hz square wave will be used */
 			sound_play(1000, 400);
 		}
 
-		lcd_printf(0, 10 + yoffs, 1, "  Audio Playing : Stopped  ");
+		lcd_printf(0, 10 + yoffs, 1,   "AUDIO STATUS: Stopped");
 		mdelay(500);
 
 	}
@@ -1050,7 +1052,7 @@ static int do_odroidtest_audio(cmd_tbl_t * cmdtp, int flag,
 	gpio_free(PHONE_DET_GPIO);
 
 	lcd_setfg_color("white");
-	lcd_printf(0, 18 + yoffs, 1, "AUDIO TEST TERMINATED!");
+	lcd_printf(0, 18 + yoffs, 1, "AUDIO TEST HAS FINISHED!");
 
 	return 0;
 }
@@ -1083,7 +1085,7 @@ static int do_odroidtest_all(cmd_tbl_t * cmdtp, int flag,
 	lcd_clear();
 	lcd_setfg_color("yellow");
 	lcd_printf(0, 9, 1, "AUTO TEST DONE!");
-	lcd_printf(0, 16 + yoffs, 1, "wait power key...");
+	lcd_printf(0, 16 + yoffs, 1, "Waiting for POWER key to shutdown.");
 
 	/* check power key */
 	while (delay) {
@@ -1096,7 +1098,7 @@ static int do_odroidtest_all(cmd_tbl_t * cmdtp, int flag,
 	}
 
 	printf("power key long pressed...\n");
-	lcd_printf(0, 18 + yoffs, 1, "%s", "power off...");
+	lcd_printf(0, 18 + yoffs, 1, "%s", "Shutting down...");
 	mdelay(500);
 	run_command("poweroff", 0);
 

@@ -355,13 +355,11 @@ static void charge_show_bmp(int idx, struct udevice *fg)
 		printf("[%s] show_bmp fail\n", __func__);
 
 	/* show battery voltage level */
-	sprintf(cmd, "battery : %d.%d V", (battery / 1000), ((battery % 1000) / 100));
-	lcd_setfg_color("grey");
+	lcd_setfg_color("white");
+	sprintf(cmd, "Battery Voltage: %d.%d V", (battery / 1000), ((battery % 1000) / 100));
 	lcd_printf(0, 18 + disp_offs, 1, "%s", cmd);
-
-	sprintf(cmd, "current : %d mA", current_avg);
+	sprintf(cmd, "Electric Current Value: %d mA", current_avg);
 	lcd_printf(0, 19 + disp_offs, 1, "%s", cmd);
-
 
 	printf("charge_show_bmp end!\n");
 }
@@ -491,8 +489,8 @@ static int charge_extrem_low_power(struct udevice *dev)
 			/* display low voltage status */
 			charge_show_bmp(4, fg); /* battery fail */
 
-			lcd_printf(0, 15 + disp_offs, 1, "Extreme Low Battery, please wait until changed to 5%");
-			lcd_printf(0, 16 + disp_offs, 1, " LCD will be off soon.");
+			lcd_printf(0, 15 + disp_offs, 1, "Battery level is extreme low! Please charge to at least 5%.");
+			lcd_printf(0, 16 + disp_offs, 1, "The system will be shut down soon.");
 		}
 
 		if ((get_timer(disp_start) > 5000) && screen_on) {

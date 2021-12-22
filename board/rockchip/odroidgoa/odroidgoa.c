@@ -146,7 +146,7 @@ void board_check_mandatory_files(void)
 	if (file_exists("mmc", "1:2", "/usr/local/bin/emulationstation/emulationstation",
 				FS_TYPE_EXT)) {
 		lcd_setfg_color("white");
-		lcd_printf(0, 0, 1, "[ GO Advanced EMULATION Image ]");
+		lcd_printf(0, 0, 1, "[ GO Advanced EmulationStation Image ]");
 	}
 
 	return;
