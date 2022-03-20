@@ -1,3 +1,20 @@
+[![Build Status](https://app.travis-ci.com/james1191991/u-boot.svg?branch=odroidgoA-v2017.09)](https://app.travis-ci.com/james1191991/u-boot)
+
+Note
+==========
+
+This is a modified version of u-boot for odroidgoa.
+
+ ** It's used for my personal researches and customizations.
+
+And it may contains some problems or unstable for daily use.**
+
+Please fork from the upstream repository:
+
+https://github.com/hardkernel/u-boot
+
+----------
+
 #
 # (C) Copyright 2000 - 2013
 # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
