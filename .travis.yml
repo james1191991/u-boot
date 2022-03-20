@@ -36,7 +36,7 @@ before_deploy:
   - export REMOTE_URL=`git config --get remote.origin.url`
   - export GIT_TAG="travis/${RELEASE_VERSION}"
   - git tag ${GIT_TAG} -a -m "Tagged by Travis CI"
-  - git push --quiet https://${PRIVATE_ACCESS_TOKEN}@${REMOTE_URL#$"https://"} ${GIT_TAG}
+  - git push --quiet https://${PRIVATE_ACCESS_TOKEN}@${REMOTE_URL#$"https://"} ${GIT_TAG} >/dev/null 2>&1
 
 deploy:
   provider: releases
