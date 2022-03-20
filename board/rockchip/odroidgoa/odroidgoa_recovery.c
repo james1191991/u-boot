@@ -125,12 +125,9 @@ void board_odroid_recovery(void)
 
 	/* recovery done */
 	loop = 3;
-	char recovery_done_msg[28] = "Recovery has been upgraded! ";
 	while (loop) {
-		if (strcmp(cmd, "poweroff") == 0)
-			sprintf(str, strcat(recovery_done_msg, "The device will be shutdown in %d second(s)."), cmd, loop);
-		else
-			sprintf(str, strcat(recovery_done_msg, "The device will be %s in %d second(s)."), cmd, loop);
+		sprintf(str, "Recovery has been upgraded! The device will be %s in %d second(s).", cmd, loop);
+
 		/* there is no vfat mbr in sd card now */
 		odroid_display_status(LOGO_MODE_RECOVERY, LOGO_STORAGE_ANYWHERE, str);
 		mdelay(1000);
