@@ -2,7 +2,7 @@ language: c
 
 env:
   global:
-    - TARGET_BOARD=odroidgo2
+    - TARGET_BOARD=odroidgoa
     - TRAVIS_SECURE_ENV_VARS=true
     - ARCH=arm64
     - CROSS_COMPILE=aarch64-none-elf-
