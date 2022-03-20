@@ -144,7 +144,7 @@ int do_booti(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 #ifdef CONFIG_PLATFORM_ODROID_GOADV
 	{
 		odroid_display_status(LOGO_MODE_SYSTEM_ERR, LOGO_STORAGE_SPIFLASH,
-				"booting fail! check kernel and dtb images!");
+				"Boot failed! Please check kernel and dtb images.");
 		odroid_wait_pwrkey();
 	}
 #else
