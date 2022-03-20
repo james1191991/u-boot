@@ -5,9 +5,9 @@ Note
 
 This is a modified version of u-boot for odroidgoa.
 
- ** It's used for my personal researches and customizations.
+ **It's used for my personal researches and customizations.**
 
-And it may contains some problems or unstable for daily use.**
+ **And it may contains some problems or unstable for daily use.**
 
 Please fork from the upstream repository:
 
